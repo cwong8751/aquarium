@@ -9,3 +9,7 @@ body, html {
 canvas {
     display: block;
 }
+
+.canvasdiag, .diagnostic, .mousediag {
+    background-color: transparent;
+}

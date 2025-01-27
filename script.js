@@ -5,6 +5,10 @@ canvas.height = window.innerHeight;
 canvas.style.backgroundColor = 'aliceblue';
 var ctx = canvas.getContext('2d');
 
+// print out canvas diag
+let canvasDiag = document.getElementById('canvasdiag');
+canvasDiag.innerHTML = `canvas width: ${canvas.width}, canvas height: ${canvas.height}`;
+
 // init vars
 let angle = 0;
 let centerX = canvas.width / 2;
@@ -16,10 +20,27 @@ let dx = 2; // Horizontal speed (pixels per frame)
 let dy = 1; // Vertical speed (pixels per frame)
 let size = 40;
 
+// init mouse tracking
+let mouseX = 0;
+let mouseY = 0;
+
+canvas.addEventListener('mousemove', function (event) {
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+
+    // print out diag info
+    let diagDiv = document.getElementById('mousediag');
+    diagDiv.innerHTML = `mouseX: ${mouseX}, mouseY: ${mouseY}`;
+});
+
 // add auto resize when window resize
 window.onresize = function () {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+
+    // update canvas diag 
+    let canvasDiag = document.getElementById('canvasdiag');
+    canvasDiag.innerHTML = `canvas width: ${canvas.width}, canvas height: ${canvas.height}`;
 };
 
 // animate loop
@@ -45,7 +66,7 @@ function animate() {
     let diagDiv = document.getElementById('diagnostic');
     diagDiv.innerHTML = `x: ${x}, y: ${y}, dx: ${dx}, dy: ${dy}, angle: ${Math.round(fishAngle * 100) / 100} rad`;
 
-    requestAnimationFrame(animate); 
+    requestAnimationFrame(animate);
 }
 
 // helper functions
